@@ -1,0 +1,212 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" uid="uid://ynhwqp1y2yll" path="res://assets/characters/cyto/cyto.png" id="1_cyto"]
+[ext_resource type="Script" path="res://assets/characters/cyto/cyto.gd" id="2_script"]
+[ext_resource type="Texture2D" path="res://assets/weapon/Nukleus.png" id="3_nukleus"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_stay"]
+atlas = ExtResource("1_cyto")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_walk1"]
+atlas = ExtResource("1_cyto")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_walkm1"]
+atlas = ExtResource("1_cyto")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_walk2"]
+atlas = ExtResource("1_cyto")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_walkm2"]
+atlas = ExtResource("1_cyto")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cyto_body"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_stay")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_walk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_walkm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_walk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_walkm2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_eye_open"]
+atlas = ExtResource("1_cyto")
+region = Rect2(160, 0, 5, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_eye_half"]
+atlas = ExtResource("1_cyto")
+region = Rect2(166, 0, 5, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_eye_close"]
+atlas = ExtResource("1_cyto")
+region = Rect2(172, 0, 5, 5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_idle_eye"]
+animations = [{
+"frames": [{
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_idle_eye_open")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_eye_half")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_idle_eye_close")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_eye_half")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mouth_idle"]
+atlas = ExtResource("1_cyto")
+region = Rect2(160, 13, 4, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_side_eye_open"]
+atlas = ExtResource("1_cyto")
+region = Rect2(160, 6, 4, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_side_eye_half"]
+atlas = ExtResource("1_cyto")
+region = Rect2(165, 6, 4, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_side_eye_close"]
+atlas = ExtResource("1_cyto")
+region = Rect2(170, 6, 4, 5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_side_eye"]
+animations = [{
+"frames": [{
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_side_eye_open")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_side_eye_half")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_side_eye_close")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_side_eye_half")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mouth_walk"]
+atlas = ExtResource("1_cyto")
+region = Rect2(165, 13, 2, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cyto"]
+radius = 7.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_weapon_hitbox"]
+size = Vector2(8, 22)
+
+[node name="Cyto" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+script = ExtResource("2_script")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_cyto_body")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="FaceIdle" type="Node2D" parent="Body"]
+
+[node name="EyeLeft" type="AnimatedSprite2D" parent="Body/FaceIdle"]
+texture_filter = 1
+position = Vector2(-5.5, -0.5)
+sprite_frames = SubResource("SpriteFrames_idle_eye")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="EyeRight" type="AnimatedSprite2D" parent="Body/FaceIdle"]
+texture_filter = 1
+position = Vector2(5.5, -0.5)
+sprite_frames = SubResource("SpriteFrames_idle_eye")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Mouth" type="Sprite2D" parent="Body/FaceIdle"]
+texture_filter = 1
+position = Vector2(0.5, 3.5)
+texture = SubResource("AtlasTexture_mouth_idle")
+
+[node name="FaceWalk" type="Node2D" parent="Body"]
+visible = false
+
+[node name="EyeSide" type="AnimatedSprite2D" parent="Body/FaceWalk"]
+texture_filter = 1
+position = Vector2(5.5, -0.5)
+sprite_frames = SubResource("SpriteFrames_side_eye")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Mouth" type="Sprite2D" parent="Body/FaceWalk"]
+texture_filter = 1
+position = Vector2(7.5, 3.5)
+texture = SubResource("AtlasTexture_mouth_walk")
+
+[node name="WeaponPivot" type="Node2D" parent="Body"]
+position = Vector2(-12.5, 8.5)
+rotation = -0.610865
+
+[node name="WeaponSprite" type="Sprite2D" parent="Body/WeaponPivot"]
+texture_filter = 1
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_nukleus")
+offset = Vector2(0, -34)
+
+[node name="Hitbox" type="Area2D" parent="Body/WeaponPivot"]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/WeaponPivot/Hitbox"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_weapon_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_cyto")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+limit_left = 0
+limit_top = 0
+limit_right = 3840
+limit_bottom = 720
+

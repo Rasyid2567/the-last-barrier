@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://jpodat2tsi2"]
+
+[ext_resource type="Script" uid="uid://bfwobubrmxeq7" path="res://ground.gd" id="1_wtcfe"]
+[ext_resource type="PackedScene" path="res://assets/characters/cyto/cyto.tscn" id="2_cyto"]
+[ext_resource type="PackedScene" uid="uid://bj7yg1laixawc" path="res://assets/characters/glia/glia.tscn" id="3_glia"]
+[ext_resource type="PackedScene" path="res://assets/characters/makro/makro.tscn" id="4_makro"]
+[ext_resource type="PackedScene" uid="uid://vtrrek5da3vx" path="res://assets/characters/lacto/lacto.tscn" id="5_lacto"]
+[ext_resource type="Texture2D" uid="uid://fkcr3wlf7rw0" path="res://assets/environment/ground/floor_crimson.png" id="6_floor_crimson"]
+[ext_resource type="PackedScene" path="res://assets/environment/ground/platform_crimson.tscn" id="7_platform_crimson"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor1"]
+size = Vector2(1100, 131)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor2"]
+size = Vector2(730, 131)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor3"]
+size = Vector2(650, 131)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor4"]
+size = Vector2(520, 131)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(32, 720)
+
+[node name="InGame" type="Node2D" unique_id=605942534]
+y_sort_enabled = true
+
+[node name="Ground" type="Sprite2D" parent="." unique_id=114652291]
+z_index = -10
+script = ExtResource("1_wtcfe")
+
+[node name="FloorSprite1" type="Sprite2D" parent="." unique_id=1357008590]
+z_index = -5
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, 591)
+scale = Vector2(2, 2)
+texture = ExtResource("6_floor_crimson")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 550, 64)
+
+[node name="FloorSprite2" type="Sprite2D" parent="." unique_id=1811324938]
+z_index = -5
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(1322, 407)
+scale = Vector2(2, 2)
+texture = ExtResource("6_floor_crimson")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 365, 64)
+
+[node name="FloorSprite3" type="Sprite2D" parent="." unique_id=878093233]
+z_index = -5
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(2450, 591)
+scale = Vector2(2, 2)
+texture = ExtResource("6_floor_crimson")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 325, 64)
+
+[node name="FloorSprite4" type="Sprite2D" parent="." unique_id=433376553]
+z_index = -5
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(3320, 591)
+scale = Vector2(2, 2)
+texture = ExtResource("6_floor_crimson")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 260, 64)
+
+[node name="WorldBoundaries" type="StaticBody2D" parent="." unique_id=1756041406]
+collision_mask = 0
+
+[node name="FloorCollision1" type="CollisionShape2D" parent="WorldBoundaries" unique_id=133968512]
+position = Vector2(550, 654.5)
+shape = SubResource("RectangleShape2D_floor1")
+
+[node name="FloorCollision2" type="CollisionShape2D" parent="WorldBoundaries" unique_id=1422032194]
+position = Vector2(1687, 470.5)
+shape = SubResource("RectangleShape2D_floor2")
+
+[node name="FloorCollision3" type="CollisionShape2D" parent="WorldBoundaries" unique_id=1196498453]
+position = Vector2(2775, 654.5)
+shape = SubResource("RectangleShape2D_floor3")
+
+[node name="FloorCollision4" type="CollisionShape2D" parent="WorldBoundaries" unique_id=408202965]
+position = Vector2(3580, 654.5)
+shape = SubResource("RectangleShape2D_floor4")
+
+[node name="LeftWallCollision" type="CollisionShape2D" parent="WorldBoundaries" unique_id=2056158931]
+position = Vector2(-16, 360)
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWallCollision" type="CollisionShape2D" parent="WorldBoundaries" unique_id=2065853621]
+position = Vector2(3856, 360)
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Cyto" parent="." unique_id=1089482718 instance=ExtResource("2_cyto")]
+position = Vector2(371, 539)
+
+[node name="Glia" parent="." unique_id=1386036739 instance=ExtResource("3_glia")]
+position = Vector2(305, 541)
+
+[node name="Lacto" parent="." unique_id=1126558013 instance=ExtResource("5_lacto")]
+position = Vector2(236, 538)
+
+[node name="Makro" parent="." unique_id=1182781112 instance=ExtResource("4_makro")]
+position = Vector2(172, 539)
+
+[node name="PlatformCrimson1" parent="." unique_id=1418497090 instance=ExtResource("7_platform_crimson")]
+position = Vector2(560, 543)
+
+[node name="PlatformCrimson2" parent="." unique_id=1888707869 instance=ExtResource("7_platform_crimson")]
+position = Vector2(780, 485)
+
+[node name="PlatformCrimson3" parent="." unique_id=924490491 instance=ExtResource("7_platform_crimson")]
+position = Vector2(1011, 515)
+
+[node name="PlatformCrimson4" parent="." unique_id=670734505 instance=ExtResource("7_platform_crimson")]
+position = Vector2(1204, 441)
+
+[node name="PlatformCrimson7" parent="." unique_id=1315102447 instance=ExtResource("7_platform_crimson")]
+position = Vector2(2186, 512)
+
+[node name="PlatformCrimson8" parent="." unique_id=563785064 instance=ExtResource("7_platform_crimson")]
+position = Vector2(2350, 510)
+
+[node name="PlatformCrimson9" parent="." unique_id=1091812590 instance=ExtResource("7_platform_crimson")]
+position = Vector2(2720, 540)
+
+[node name="PlatformCrimson10" parent="." unique_id=695890223 instance=ExtResource("7_platform_crimson")]
+position = Vector2(2930, 485)
+
+[node name="PlatformCrimson11" parent="." unique_id=1739107822 instance=ExtResource("7_platform_crimson")]
+position = Vector2(3210, 560)

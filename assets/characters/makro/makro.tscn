@@ -1,0 +1,131 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" uid="uid://2yaymmhs38sv" path="res://assets/characters/makro/makro.png" id="1_makro"]
+[ext_resource type="Script" path="res://assets/characters/makro/makro.gd" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_stay"]
+atlas = ExtResource("1_makro")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_walk1"]
+atlas = ExtResource("1_makro")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_walk2"]
+atlas = ExtResource("1_makro")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body_walk3"]
+atlas = ExtResource("1_makro")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_body"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_stay")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_walk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_walk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body_walk3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eye_open"]
+atlas = ExtResource("1_makro")
+region = Rect2(128, 0, 2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eye_blink"]
+atlas = ExtResource("1_makro")
+region = Rect2(131, 1, 2, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eye"]
+animations = [{
+"frames": [{
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_eye_open")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eye_blink")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mouth_idle"]
+atlas = ExtResource("1_makro")
+region = Rect2(128, 4, 4, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mouth_walk"]
+atlas = ExtResource("1_makro")
+region = Rect2(128, 8, 2, 3)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_makro"]
+radius = 7.0
+height = 14.0
+
+[node name="Makro" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1
+script = ExtResource("2_script")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_body")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="FaceIdle" type="Node2D" parent="Body"]
+
+[node name="EyeLeft" type="AnimatedSprite2D" parent="Body/FaceIdle"]
+texture_filter = 1
+position = Vector2(-4, -5)
+sprite_frames = SubResource("SpriteFrames_eye")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="EyeRight" type="AnimatedSprite2D" parent="Body/FaceIdle"]
+texture_filter = 1
+position = Vector2(3, -5)
+sprite_frames = SubResource("SpriteFrames_eye")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Mouth" type="Sprite2D" parent="Body/FaceIdle"]
+texture_filter = 1
+position = Vector2(0, -2.5)
+texture = SubResource("AtlasTexture_mouth_idle")
+
+[node name="FaceWalk" type="Node2D" parent="Body"]
+visible = false
+
+[node name="EyeSide" type="AnimatedSprite2D" parent="Body/FaceWalk"]
+texture_filter = 1
+position = Vector2(7, -5)
+sprite_frames = SubResource("SpriteFrames_eye")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Mouth" type="Sprite2D" parent="Body/FaceWalk"]
+texture_filter = 1
+position = Vector2(9, -2.5)
+texture = SubResource("AtlasTexture_mouth_walk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("CapsuleShape2D_makro")

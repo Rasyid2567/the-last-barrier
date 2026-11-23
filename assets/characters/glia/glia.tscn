@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://bj7yg1laixawc"]
+
+[ext_resource type="Texture2D" uid="uid://b2ogovplh2wk3" path="res://assets/characters/glia/glia.png" id="1_glia"]
+[ext_resource type="Script" uid="uid://d4lxekdv2nbyi" path="res://assets/characters/glia/glia.gd" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body0"]
+atlas = ExtResource("1_glia")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body1"]
+atlas = ExtResource("1_glia")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_body2"]
+atlas = ExtResource("1_glia")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_body"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body0")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_body2")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_face_idle_open"]
+atlas = ExtResource("1_glia")
+region = Rect2(103, 0, 9, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_face_idle_blink"]
+atlas = ExtResource("1_glia")
+region = Rect2(103, 4, 9, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_face_idle"]
+animations = [{
+"frames": [{
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_face_idle_open")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_face_idle_blink")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_face_walk_open"]
+atlas = ExtResource("1_glia")
+region = Rect2(107, 9, 5, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_face_walk_blink"]
+atlas = ExtResource("1_glia")
+region = Rect2(107, 14, 5, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_face_walk"]
+animations = [{
+"frames": [{
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_face_walk_open")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_face_walk_blink")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_glia"]
+radius = 8.0
+
+[node name="Glia" type="CharacterBody2D" unique_id=531399804]
+collision_layer = 4
+script = ExtResource("2_script")
+
+[node name="Body" type="AnimatedSprite2D" parent="." unique_id=1410230114]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_body")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="FaceIdle" type="AnimatedSprite2D" parent="Body" unique_id=1058135845]
+texture_filter = 1
+position = Vector2(-0.5, -1)
+sprite_frames = SubResource("SpriteFrames_face_idle")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="FaceWalk" type="AnimatedSprite2D" parent="Body" unique_id=1599597115]
+visible = false
+texture_filter = 1
+position = Vector2(6.5, -1)
+sprite_frames = SubResource("SpriteFrames_face_walk")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=538211475]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_glia")
